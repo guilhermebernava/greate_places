@@ -26,46 +26,64 @@ class SplashState extends State<Splash> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Material(
       color: AppColors.black,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          AnimatedBuilder(
-            animation: controller.animation,
-            builder: (context, child) => AnimatedBuilder(
-              animation: controller.sideAnimation,
-              builder: (context, child) => Transform.rotate(
-                angle: controller.sideAnimation.value,
-                child: Icon(
-                  Icons.place_rounded,
-                  color: AppColors.primary,
-                  size: controller.animation.value,
+          Container(
+            width: size.width * 0.9,
+            height: size.height * 0.875,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.white,
+                width: 0.5,
+              ),
+              borderRadius: BorderRadius.circular(1),
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedBuilder(
+                animation: controller.animation,
+                builder: (context, child) => AnimatedBuilder(
+                  animation: controller.sideAnimation,
+                  builder: (context, child) => Transform.rotate(
+                    angle: controller.sideAnimation.value,
+                    child: Icon(
+                      Icons.place_rounded,
+                      color: AppColors.primary,
+                      size: controller.animation.value,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                opacity: controller.opacity,
+                child: Container(
+                  width: size.width * 0.1,
+                  height: 5,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.05,
+              ),
+              AnimatedOpacity(
+                opacity: controller.opacity,
+                duration: const Duration(seconds: 2),
+                curve: Curves.easeInOutCubicEmphasized,
+                child: Text(
+                  'Great Places',
+                  style: GoogleFonts.satisfy(fontSize: 40, color: Colors.white),
+                ),
+              )
+            ],
           ),
-          AnimatedOpacity(
-            duration: const Duration(milliseconds: 300),
-            opacity: controller.opacity,
-            child: Container(
-              width: 30,
-              height: 5,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          AnimatedOpacity(
-            opacity: controller.opacity,
-            duration: const Duration(seconds: 2),
-            curve: Curves.easeInOutCubicEmphasized,
-            child: Text(
-              'Great Places',
-              style: GoogleFonts.satisfy(fontSize: 40, color: Colors.white),
-            ),
-          )
         ],
       ),
     );

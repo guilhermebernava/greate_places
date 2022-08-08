@@ -14,6 +14,16 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primaryColor: AppColors.appMaterialColor,
         backgroundColor: AppColors.black,
+        appBarTheme: const AppBarTheme(
+          color: AppColors.primary,
+          toolbarHeight: 40,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: AppColors.secundary,
+            elevation: 1,
+          ),
+        ),
       ),
     );
   }
