@@ -34,15 +34,25 @@ class SplashState extends State<Splash> with TickerProviderStateMixin {
         alignment: Alignment.center,
         children: [
           Container(
-            width: size.width * 0.9,
-            height: size.height * 0.875,
+            width: size.width,
+            height: size.height,
+            decoration: const BoxDecoration(color: AppColors.black),
+          ),
+          Container(
+            width: size.width * 0.82,
+            height: size.height * 0.81,
             decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.white,
-                width: 0.5,
+              borderRadius: BorderRadius.circular(5),
+              gradient: const RadialGradient(
+                colors: [Color(0xff000000), Color(0xffffffff)],
+                radius: 0.6,
               ),
-              borderRadius: BorderRadius.circular(1),
             ),
+          ),
+          Container(
+            width: size.width * 0.8,
+            height: size.height * 0.8,
+            decoration: const BoxDecoration(color: AppColors.black),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -52,6 +62,7 @@ class SplashState extends State<Splash> with TickerProviderStateMixin {
                 builder: (context, child) => AnimatedBuilder(
                   animation: controller.sideAnimation,
                   builder: (context, child) => Transform.rotate(
+                    origin: const Offset(0, 50),
                     angle: controller.sideAnimation.value,
                     child: Icon(
                       Icons.place_rounded,
@@ -62,10 +73,10 @@ class SplashState extends State<Splash> with TickerProviderStateMixin {
                 ),
               ),
               AnimatedOpacity(
-                duration: const Duration(milliseconds: 300),
-                opacity: controller.opacity,
+                duration: const Duration(milliseconds: 100),
+                opacity: controller.opacityLine,
                 child: Container(
-                  width: size.width * 0.1,
+                  width: size.width * 0.05,
                   height: 5,
                   color: Colors.white,
                 ),
@@ -74,9 +85,9 @@ class SplashState extends State<Splash> with TickerProviderStateMixin {
                 height: size.height * 0.05,
               ),
               AnimatedOpacity(
-                opacity: controller.opacity,
-                duration: const Duration(seconds: 2),
-                curve: Curves.easeInOutCubicEmphasized,
+                opacity: controller.opacityText,
+                duration: const Duration(seconds: 1),
+                curve: Curves.fastLinearToSlowEaseIn,
                 child: Text(
                   'Great Places',
                   style: GoogleFonts.satisfy(fontSize: 40, color: Colors.white),

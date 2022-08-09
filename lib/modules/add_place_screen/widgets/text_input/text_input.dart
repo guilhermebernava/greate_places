@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../../core/themes/app_colors.dart';
+import '../../../../core/themes/app_colors.dart';
 
 class TextInput extends StatefulWidget {
   final TextEditingController controller;
   final String label;
+  final String? Function(String?)? validator;
 
   const TextInput({
     Key? key,
     required this.controller,
     required this.label,
+    required this.validator,
   }) : super(key: key);
 
   @override
@@ -60,8 +62,10 @@ class _TextInputState extends State<TextInput> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
-      child: TextField(
+      child: TextFormField(
+        validator: widget.validator,
         focusNode: focusNode,
+        style: const TextStyle(color: Colors.white),
         controller: widget.controller,
         decoration: InputDecoration(
           label: isSelected
@@ -84,9 +88,18 @@ class _TextInputState extends State<TextInput> with TickerProviderStateMixin {
                 )
               : Text(widget.label),
           focusColor: AppColors.primary,
+          labelStyle: const TextStyle(color: Colors.white),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white,
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(100),
+            ),
+          ),
           border: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: AppColors.black,
+              color: Colors.white,
             ),
             borderRadius: BorderRadius.all(
               Radius.circular(100),

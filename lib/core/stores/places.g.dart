@@ -12,11 +12,13 @@ mixin _$Places on AbstractPlaces, Store {
   late final _$_placesAtom =
       Atom(name: 'AbstractPlaces._places', context: context);
 
-  @override
-  ObservableList<Place> get _places {
+  ObservableList<Place> get places {
     _$_placesAtom.reportRead();
     return super._places;
   }
+
+  @override
+  ObservableList<Place> get _places => places;
 
   @override
   set _places(ObservableList<Place> value) {

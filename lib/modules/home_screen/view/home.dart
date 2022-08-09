@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:greate_places/stores/places.dart';
+import 'package:greate_places/modules/home_screen/widgets/place_list/place_list.dart';
+import '../../../core/stores/places.dart';
 
 class Home extends StatelessWidget {
   final String addPlaceRoute;
   const Home({Key? key, required this.addPlaceRoute}) : super(key: key);
-  static const route = '/';
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +27,9 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body: SizedBox(
-          child: ListView.builder(
-            itemBuilder: (context, index) =>
-                Text(placesStore.places[index].title),
-            itemCount: placesStore.places.length,
-          ),
+        body: PlaceList(
+          size: size,
+          placesStore: placesStore,
         ),
       ),
     );

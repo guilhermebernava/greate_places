@@ -11,7 +11,7 @@ class HomeModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute(
-          Home.route,
+          '/',
           child: (_, __) => const Home(
             addPlaceRoute: AddPlace.route,
           ),
