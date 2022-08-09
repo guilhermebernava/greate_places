@@ -3,8 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:greate_places/core/models/place.dart';
 import 'package:greate_places/core/models/place_location.dart';
 import 'package:greate_places/core/services/snack_bar_services.dart';
+import 'package:greate_places/modules/add_place_screen/stores/addplaces_routes.dart';
 import 'package:greate_places/modules/add_place_screen/widgets/image_input/controller/image_input_controller.dart';
-import 'package:greate_places/modules/home_screen/home_module.dart';
 import '../../../core/stores/places.dart';
 
 class AddImageController {
@@ -12,6 +12,7 @@ class AddImageController {
   final titleController = TextEditingController();
   final ImageInputController imageInputController;
   final Places placesStore;
+  final routes = Modular.get<AddPlacesRoutes>();
 
   AddImageController(this.imageInputController, this.placesStore);
 
@@ -43,6 +44,6 @@ class AddImageController {
       image: imageInputController.storageImage!,
     ));
 
-    Modular.to.navigate(HomeModule.route);
+    Modular.to.navigate(routes.homeRoute);
   }
 }

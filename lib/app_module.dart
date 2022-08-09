@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:greate_places/modules/add_place_screen/view/add_place.dart';
 import 'package:greate_places/modules/home_screen/home_module.dart';
+import 'package:greate_places/modules/place_detail_screen/place_detail_module.dart';
 import 'package:greate_places/modules/splash_screen/view/splash.dart';
 import 'core/stores/places.dart';
 import 'modules/add_place_screen/app_place_module.dart';
@@ -17,11 +17,19 @@ class AppModule extends Module {
             child: (_, __) => const Splash(),
             transition: TransitionType.fadeIn),
         ModuleRoute(
-          AddPlace.route,
+          AddPlaceModule.route,
           module: AddPlaceModule(),
           transition: TransitionType.leftToRight,
         ),
-        ModuleRoute(HomeModule.route,
-            module: HomeModule(), transition: TransitionType.fadeIn),
+        ModuleRoute(
+          HomeModule.route,
+          module: HomeModule(),
+          transition: TransitionType.fadeIn,
+        ),
+        ModuleRoute(
+          PlaceDetailModule.route,
+          module: PlaceDetailModule(),
+          transition: TransitionType.rightToLeft,
+        ),
       ];
 }

@@ -14,10 +14,9 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primaryColor: AppColors.appMaterialColor,
         backgroundColor: AppColors.black,
-        scaffoldBackgroundColor: AppColors.black,
+        scaffoldBackgroundColor: AppColors.primary,
         appBarTheme: const AppBarTheme(
           color: AppColors.primary,
-          toolbarHeight: 40,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
