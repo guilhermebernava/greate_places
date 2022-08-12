@@ -15,7 +15,7 @@ class HomeAppBar extends PreferredSize {
           child: Container(
             color: AppColors.primary,
             alignment: Alignment.center,
-            height: size.height * 0.26,
+            height: size.height * 0.3,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20.0,

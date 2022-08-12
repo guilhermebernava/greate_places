@@ -46,9 +46,11 @@ class _SafeButtonState extends State<SafeButton> {
           Future.delayed(
             Duration(seconds: widget.duration),
           ).then((value) {
-            setState(() {
-              _canClick = true;
-            });
+            if (mounted) {
+              setState(() {
+                _canClick = true;
+              });
+            }
           });
         },
         borderRadius: BorderRadius.circular(5),

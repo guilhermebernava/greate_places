@@ -61,6 +61,6 @@ class AddImageController {
       ));
     });
 
-    Modular.to.navigate(routes.homeRoute);
+    Modular.to.pop();
   }
 }

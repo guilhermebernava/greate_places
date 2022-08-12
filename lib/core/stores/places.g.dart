@@ -27,8 +27,27 @@ mixin _$Places on AbstractPlaces, Store {
     });
   }
 
+  late final _$getAllAsyncAction =
+      AsyncAction('AbstractPlaces.getAll', context: context);
+
+  @override
+  Future<dynamic> getAll() {
+    return _$getAllAsyncAction.run(() => super.getAll());
+  }
+
   late final _$AbstractPlacesActionController =
       ActionController(name: 'AbstractPlaces', context: context);
+
+  @override
+  void delete(int id) {
+    final _$actionInfo = _$AbstractPlacesActionController.startAction(
+        name: 'AbstractPlaces.delete');
+    try {
+      return super.delete(id);
+    } finally {
+      _$AbstractPlacesActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void add(Place place) {

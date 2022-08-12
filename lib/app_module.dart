@@ -34,6 +34,7 @@ class AppModule extends Module {
           PlaceDetailModule.route,
           module: PlaceDetailModule(),
           transition: TransitionType.rightToLeft,
+          duration: const Duration(milliseconds: 600),
         ),
       ];
 }

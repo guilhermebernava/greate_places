@@ -33,10 +33,10 @@ class _ImageInputState extends State<ImageInput> {
                         fit: BoxFit.cover,
                       ),
                     )
-                  : const Center(
+                  : Center(
                       child: Text(
-                        'No Image Selected',
-                        style: TextStyle(color: Colors.white),
+                        controller.text,
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
         ),
