@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:greate_places/core/themes/app_colors.dart';
 
 class AppTextStyle {
   static final appBarTitle = GoogleFonts.manrope(
