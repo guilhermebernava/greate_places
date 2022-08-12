@@ -5,7 +5,7 @@ import 'package:greate_places/modules/home_screen/view/home.dart';
 import 'package:greate_places/modules/place_detail_screen/place_detail_module.dart';
 
 class HomeModule extends Module {
-  static const route = '/home';
+  static const route = '/home/';
 
   @override
   List<Bind<Object>> get binds => [

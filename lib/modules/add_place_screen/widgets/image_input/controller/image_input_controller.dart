@@ -23,7 +23,7 @@ class ImageInputController {
       await image.saveTo(savedImagePath);
 
       setState(() {
-        storageImage = File(savedImagePath);
+        storageImage = File(image.path);
         isLoading = false;
       });
       return;

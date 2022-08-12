@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'core/themes/app_colors.dart';
 
@@ -16,6 +17,9 @@ class App extends StatelessWidget {
         backgroundColor: AppColors.black,
         scaffoldBackgroundColor: AppColors.primary,
         appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.white,
+          ),
           color: AppColors.primary,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(

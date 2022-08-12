@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class SplashController {
+class SplashController implements Disposable {
   late final AnimationController animationController;
   late final AnimationController sideAnimationController;
   late final Animation<double> animation;
@@ -53,6 +53,9 @@ class SplashController {
 
   static void loading() {
     Future.delayed(const Duration(seconds: 3))
-        .then((value) => {Modular.to.navigate('/home')});
+        .then((value) => {Modular.to.navigate('/home/')});
   }
+
+  @override
+  void dispose() {}
 }

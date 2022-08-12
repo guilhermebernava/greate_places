@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:greate_places/core/themes/app_colors.dart';
+import 'package:greate_places/core/services/location.dart';
+import 'package:greate_places/core/widgets/loading_widget/loading_widget.dart';
+import 'package:greate_places/core/widgets/white_status_bar/white_status_bar.dart';
 import 'package:greate_places/modules/home_screen/widgets/place_list/place_list.dart';
 import '../../../core/stores/places.dart';
+import '../widgets/home_app_bar/home_app_bar.dart';
 
 class Home extends StatelessWidget {
   final String addPlaceRoute;
@@ -19,51 +22,52 @@ class Home extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final placesStore = Modular.get<Places>();
 
-    return SizedBox(
-      width: size.width,
-      height: size.height,
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: size,
-          child: Container(
-            height: size.height * 0.2,
-            color: AppColors.primary,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Home',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () => Modular.to.pushNamed(addPlaceRoute),
-                        icon: const Icon(
-                          Icons.add,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                      )
-                    ],
+    return FutureBuilder(
+        future: LocationServices().determinePosition(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return const LoadingWidget();
+            case ConnectionState.active:
+              break;
+            case ConnectionState.done:
+              return WhiteStatusBar(
+                child: SizedBox(
+                  width: size.width,
+                  height: size.height,
+                  child: Scaffold(
+                    appBar: HomeAppBar(
+                      size: size,
+                      addPlaceRoute: addPlaceRoute,
+                      text: snapshot.data as String,
+                    ),
+                    body: FutureBuilder(
+                      future: placesStore.getAll(),
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.none:
+                            break;
+                          case ConnectionState.waiting:
+                            return const LoadingWidget();
+                          case ConnectionState.active:
+                            break;
+                          case ConnectionState.done:
+                            return PlaceList(
+                              size: size,
+                              placesStore: placesStore,
+                            );
+                        }
+                        return const LoadingWidget();
+                      },
+                    ),
                   ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        body: PlaceList(
-          size: size,
-          placesStore: placesStore,
-        ),
-      ),
-    );
+                ),
+              );
+          }
+
+          return const LoadingWidget();
+        });
   }
 }

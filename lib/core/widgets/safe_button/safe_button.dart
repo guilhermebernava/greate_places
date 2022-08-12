@@ -27,6 +27,11 @@ class _SafeButtonState extends State<SafeButton> {
   bool _canClick = true;
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),

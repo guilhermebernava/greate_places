@@ -28,7 +28,7 @@ class PlaceList extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.only(
-          top: size.height * 0.075,
+          top: size.height * 0.04,
           left: 10,
           right: 10,
         ),
