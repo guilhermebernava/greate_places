@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:greate_places/core/themes/app_colors.dart';
 import 'package:greate_places/core/widgets/special_app_bar_image/special_app_bar_image.dart';
 import 'package:greate_places/core/widgets/white_status_bar/white_status_bar.dart';
 import '../../../core/models/place.dart';
@@ -18,8 +19,9 @@ class PlaceDetail extends StatelessWidget {
     final routes = Modular.get<PlaceDetailsRoutes>();
 
     return WhiteStatusBar(
-      child: Scaffold(
-        body: SpecialAppBarImage(
+      child: Material(
+        color: AppColors.primary,
+        child: SpecialAppBarImage(
           routeReturn: routes.homeRoute,
           size: size,
           image: place.image,

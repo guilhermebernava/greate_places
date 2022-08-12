@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:greate_places/core/themes/app_text_style.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../search_input/search_input.dart';
 
@@ -13,9 +14,14 @@ class HomeAppBar extends PreferredSize {
           key: key,
           preferredSize: size,
           child: Container(
-            color: AppColors.primary,
+            decoration: const BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(50),
+                  bottomRight: Radius.circular(50),
+                )),
             alignment: Alignment.center,
-            height: size.height * 0.3,
+            height: size.height * 0.28,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20.0,
@@ -29,12 +35,9 @@ class HomeAppBar extends PreferredSize {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         'Home',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                        ),
+                        style: AppTextStyle.appBarTitle,
                       ),
                       IconButton(
                         onPressed: () => Modular.to.pushNamed(addPlaceRoute),
@@ -59,10 +62,7 @@ class HomeAppBar extends PreferredSize {
                       Text(
                         text ?? 'no place found',
                         textAlign: TextAlign.start,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
+                        style: AppTextStyle.appBarLocation,
                       ),
                     ],
                   ),

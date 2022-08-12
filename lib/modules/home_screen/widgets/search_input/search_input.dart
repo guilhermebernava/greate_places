@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greate_places/core/themes/app_text_style.dart';
 import '../../../../core/themes/app_colors.dart';
 
 class SearchInput extends StatelessWidget {
@@ -20,7 +21,7 @@ class SearchInput extends StatelessWidget {
     return TextFormField(
       textInputAction: TextInputAction.done,
       validator: validator,
-      style: const TextStyle(color: Colors.white),
+      style: AppTextStyle.textInput,
       controller: controller,
       decoration: InputDecoration(
         // contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -33,7 +34,7 @@ class SearchInput extends StatelessWidget {
         // ),
         label: Text(label),
         focusColor: AppColors.primary,
-        labelStyle: const TextStyle(color: Colors.white),
+        labelStyle: AppTextStyle.textInputLabel,
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.white,

@@ -59,7 +59,7 @@ class _SafeButtonState extends State<SafeButton> {
           height: widget.height,
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(100),
             color: widget.color,
           ),
           child: widget.child,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greate_places/core/themes/app_text_style.dart';
 import '../../../../core/themes/app_colors.dart';
 
 class TextInput extends StatefulWidget {
@@ -65,7 +66,7 @@ class _TextInputState extends State<TextInput> with TickerProviderStateMixin {
       child: TextFormField(
         validator: widget.validator,
         focusNode: focusNode,
-        style: const TextStyle(color: Colors.white),
+        style: AppTextStyle.textInput,
         controller: widget.controller,
         decoration: InputDecoration(
           label: isSelected
@@ -88,7 +89,7 @@ class _TextInputState extends State<TextInput> with TickerProviderStateMixin {
                 )
               : Text(widget.label),
           focusColor: AppColors.primary,
-          labelStyle: const TextStyle(color: Colors.white),
+          labelStyle: AppTextStyle.textInputLabel,
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.white,

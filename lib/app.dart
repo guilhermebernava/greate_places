@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:greate_places/core/themes/app_text_style.dart';
 import 'core/themes/app_colors.dart';
 
 class App extends StatelessWidget {
@@ -15,9 +16,10 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primaryColor: AppColors.appMaterialColor,
         backgroundColor: AppColors.black,
-        scaffoldBackgroundColor: AppColors.primary,
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
+        scaffoldBackgroundColor: AppColors.black,
+        appBarTheme: AppBarTheme(
+          titleTextStyle: AppTextStyle.appBarTitle,
+          systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: Colors.white,
           ),
           color: AppColors.primary,
