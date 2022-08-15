@@ -39,6 +39,17 @@ mixin _$Places on AbstractPlaces, Store {
       ActionController(name: 'AbstractPlaces', context: context);
 
   @override
+  void filterPlaces(String text) {
+    final _$actionInfo = _$AbstractPlacesActionController.startAction(
+        name: 'AbstractPlaces.filterPlaces');
+    try {
+      return super.filterPlaces(text);
+    } finally {
+      _$AbstractPlacesActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void delete(int id) {
     final _$actionInfo = _$AbstractPlacesActionController.startAction(
         name: 'AbstractPlaces.delete');

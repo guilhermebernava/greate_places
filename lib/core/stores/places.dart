@@ -10,6 +10,9 @@ class Places = AbstractPlaces with _$Places;
 abstract class AbstractPlaces with Store {
   @readonly
   ObservableList<Place> _places = ObservableList<Place>.of([]);
+  ObservableList<Place> _filtredPlaces = ObservableList<Place>.of([]);
+  ObservableList<Place> get filtredPlaces => _filtredPlaces;
+
   final PlaceRepository _placeRepository;
 
   AbstractPlaces(this._placeRepository);
@@ -27,6 +30,25 @@ abstract class AbstractPlaces with Store {
     }
 
     _places.addAll(addList);
+  }
+
+  @action
+  void filterPlaces(String text) {
+    if (text == '') {
+      _filtredPlaces.clear();
+      return;
+    }
+
+    final filtred = _places.where((element) => element.title == text);
+
+    if (filtred.isNotEmpty) {
+      for (var place in filtred) {
+        if (_filtredPlaces.any((element) => element.id == place.id)) {
+          continue;
+        }
+        _filtredPlaces.add(place);
+      }
+    }
   }
 
   @action

@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:greate_places/core/models/place.dart';
 import 'package:greate_places/core/models/place_location.dart';
 import 'package:greate_places/core/repository/place_repository.dart';
+import 'package:greate_places/core/services/location.dart';
 import 'package:greate_places/core/services/snack_bar_services.dart';
 import 'package:greate_places/modules/add_place_screen/stores/addplaces_routes.dart';
 import 'package:greate_places/modules/add_place_screen/widgets/image_input/controller/image_input_controller.dart';
@@ -15,6 +16,7 @@ class AddImageController {
 
   final PlaceRepository _placeRepository;
   final ImageInputController imageInputController;
+  final PlaceLocation _placeLocation = PlaceLocation(lat: 0, long: 0);
   final Places placesStore;
 
   AddImageController(
@@ -33,6 +35,16 @@ class AddImageController {
     return null;
   }
 
+  Future getLocation() async {
+    LocationServices.myPosition().then((location) {
+      if (location == null) {
+        return null;
+      }
+      _placeLocation.lat = location.latitude!;
+      _placeLocation.long = location.longitude!;
+    });
+  }
+
   void createPlace(
       void Function(void Function() fn) setState, BuildContext context) async {
     if (!formKey.currentState!.validate()) {
@@ -49,14 +61,14 @@ class AddImageController {
         .create(Place(
       id: 0,
       title: titleController.text,
-      location: PlaceLocation(lat: 10, long: 10),
+      location: _placeLocation,
       image: imageInputController.storageImage!,
     ))
         .then((id) {
       placesStore.add(Place(
         id: id,
         title: titleController.text,
-        location: PlaceLocation(lat: 10, long: 10),
+        location: _placeLocation,
         image: imageInputController.storageImage!,
       ));
     });

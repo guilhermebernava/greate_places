@@ -30,9 +30,13 @@ class PlaceList extends StatelessWidget {
         ),
         child: Observer(
           builder: (_) => ListView.builder(
-            itemBuilder: (context, index) =>
-                PlaceItem(place: placesStore.places[index], size: size),
-            itemCount: placesStore.places.length,
+            itemBuilder: (context, index) => placesStore.filtredPlaces.isEmpty
+                ? PlaceItem(place: placesStore.places[index], size: size)
+                : PlaceItem(
+                    place: placesStore.filtredPlaces[index], size: size),
+            itemCount: placesStore.filtredPlaces.isEmpty
+                ? placesStore.places.length
+                : placesStore.filtredPlaces.length,
           ),
         ),
       ),

@@ -1,7 +1,7 @@
 class PlaceLocation {
-  final double long;
-  final double lat;
-  final String address;
+  double long;
+  double lat;
+  String address;
 
   PlaceLocation({
     required this.lat,

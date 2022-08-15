@@ -20,18 +20,21 @@ class SearchInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       textInputAction: TextInputAction.done,
+      onFieldSubmitted: (value) {
+        search();
+      },
       validator: validator,
       style: AppTextStyle.textInput,
       controller: controller,
       decoration: InputDecoration(
-        // contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-        // suffixIcon: IconButton(
-        //   onPressed: search,
-        //   icon: const Icon(
-        //     Icons.search_outlined,
-        //     color: Colors.white,
-        //   ),
-        // ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+        suffixIcon: IconButton(
+          onPressed: search,
+          icon: const Icon(
+            Icons.search_outlined,
+            color: Colors.white,
+          ),
+        ),
         label: Text(label),
         focusColor: AppColors.primary,
         labelStyle: AppTextStyle.textInputLabel,

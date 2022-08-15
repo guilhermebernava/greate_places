@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:greate_places/core/themes/app_text_style.dart';
 import '../../../../core/themes/app_colors.dart';
+import '../../controllers/home_controller.dart';
 import '../search_input/search_input.dart';
 
 class HomeAppBar extends PreferredSize {
@@ -9,6 +10,7 @@ class HomeAppBar extends PreferredSize {
     Key? key,
     required Size size,
     required String addPlaceRoute,
+    required HomeController controller,
     required String? text,
   }) : super(
           key: key,
@@ -70,10 +72,12 @@ class HomeAppBar extends PreferredSize {
                     height: size.height * 0.02,
                   ),
                   SearchInput(
-                    controller: TextEditingController(),
+                    controller: controller.searchController,
                     label: 'Search in yours places',
                     validator: (p0) => null,
-                    search: () {},
+                    search: () {
+                      controller.filterPlaces();
+                    },
                   )
                 ],
               ),

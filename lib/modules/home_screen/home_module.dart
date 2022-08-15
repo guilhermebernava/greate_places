@@ -25,7 +25,7 @@ class HomeModule extends Module {
         ChildRoute(
           '/',
           child: (_, __) => FutureBuilder(
-              future: LocationServices.determinePosition(),
+              future: LocationServices.myLocationAddress(),
               builder: (_, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
@@ -44,10 +44,11 @@ class HomeModule extends Module {
                     );
                 }
                 return const Center(
-                    child: Text(
-                  'ERROR',
-                  style: TextStyle(color: Colors.red, fontSize: 50),
-                ));
+                  child: Text(
+                    'ERROR',
+                    style: TextStyle(color: Colors.red, fontSize: 50),
+                  ),
+                );
               }),
         ),
       ];

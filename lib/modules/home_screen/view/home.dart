@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:greate_places/core/widgets/loading_widget/loading_widget.dart';
 import 'package:greate_places/core/widgets/white_status_bar/white_status_bar.dart';
+import 'package:greate_places/modules/home_screen/controllers/home_controller.dart';
 import 'package:greate_places/modules/home_screen/widgets/place_list/place_list.dart';
 import '../../../core/stores/places.dart';
 import '../widgets/home_app_bar/home_app_bar.dart';
@@ -29,6 +30,7 @@ class Home extends StatelessWidget {
         height: size.height,
         child: Scaffold(
           appBar: HomeAppBar(
+            controller: HomeController(),
             size: size,
             addPlaceRoute: addPlaceRoute,
             text: myLocation,
