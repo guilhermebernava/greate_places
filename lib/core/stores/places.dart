@@ -35,9 +35,15 @@ abstract class AbstractPlaces with Store {
   }
 
   @action
+  void clearFilter() {
+    _filtredPlaces.clear();
+  }
+
+  @action
   void filterPlaces(String text) {
+    clearFilter();
     if (text == '') {
-      _filtredPlaces.clear();
+      clearFilter();
       return;
     }
 

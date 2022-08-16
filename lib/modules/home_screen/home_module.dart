@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:greate_places/core/services/location.dart';
+import 'package:greate_places/core/stores/places.dart';
 import 'package:greate_places/core/widgets/loading_widget/loading_widget.dart';
 import 'package:greate_places/modules/add_place_screen/app_place_module.dart';
 import 'package:greate_places/modules/home_screen/stores/home_routes.dart';
 import 'package:greate_places/modules/home_screen/view/home.dart';
 import 'package:greate_places/modules/place_detail_screen/place_detail_module.dart';
+
+import 'widgets/place_list/controller/place_list_controller.dart';
 
 class HomeModule extends Module {
   static const route = '/home/';
@@ -18,6 +21,9 @@ class HomeModule extends Module {
             PlaceDetailModule.route,
           ),
         ),
+        Bind.singleton(
+          (i) => PlaceListController(i.get<Places>()),
+        )
       ];
 
   @override
