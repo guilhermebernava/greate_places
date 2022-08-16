@@ -12,7 +12,7 @@ class SafeButton extends StatefulWidget {
   const SafeButton({
     Key? key,
     this.color = AppColors.secundary,
-    this.duration = 3,
+    this.duration = 5,
     required this.onTap,
     required this.child,
     this.width,

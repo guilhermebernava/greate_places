@@ -51,26 +51,30 @@ class AddImageController {
       return;
     }
 
-    if (imageInputController.storageImage == null) {
+    if (imageInputController.imagePath == '') {
       SnackBarServices()
           .showSnackBarError(context, 'Need a image to crate a place');
       return;
     }
 
     _placeRepository
-        .create(Place(
-      id: 0,
-      title: titleController.text,
-      location: _placeLocation,
-      image: imageInputController.storageImage!,
-    ))
+        .create(
+      Place(
+        id: 0,
+        title: titleController.text,
+        location: _placeLocation,
+        imagePath: imageInputController.imagePath,
+      ),
+    )
         .then((id) {
       placesStore.add(Place(
         id: id,
         title: titleController.text,
         location: _placeLocation,
-        image: imageInputController.storageImage!,
+        imagePath: imageInputController.imagePath,
       ));
+    }).onError((error, stackTrace) {
+      SnackBarServices().showSnackBarError(context, "Error in save place");
     });
 
     Modular.to.pop();

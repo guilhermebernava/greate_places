@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:greate_places/core/widgets/loading_widget/loading_widget.dart';
@@ -25,11 +26,11 @@ class _ImageInputState extends State<ImageInput> {
           height: size.height * 0.4,
           child: controller.isLoading
               ? const LoadingWidget()
-              : controller.storageImage != null
+              : controller.imagePath != ''
                   ? ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.file(
-                        controller.storageImage!,
+                        File(controller.imagePath),
                         fit: BoxFit.cover,
                       ),
                     )

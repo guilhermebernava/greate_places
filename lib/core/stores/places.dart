@@ -15,7 +15,9 @@ abstract class AbstractPlaces with Store {
 
   final PlaceRepository _placeRepository;
 
-  AbstractPlaces(this._placeRepository);
+  AbstractPlaces(this._placeRepository) {
+    getAll();
+  }
 
   @action
   Future getAll() async {

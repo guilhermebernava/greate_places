@@ -1,26 +1,33 @@
-import 'dart:io';
 import 'package:greate_places/core/models/place_location.dart';
 
 class Place {
   final int? id;
   final String title;
   final PlaceLocation location;
-  final File image;
+  final String imagePath;
 
   Place({
     this.id,
     required this.title,
     required this.location,
-    required this.image,
+    required this.imagePath,
   });
 
   factory Place.fromMap(Map<String, dynamic> map) {
-    return Place(
-      id: map['id'],
-      title: map['title'],
-      location: PlaceLocation.fromMap(map),
-      image: File(map['image_path']),
-    );
+    try {
+      return Place(
+        id: map['id'],
+        title: map['title'],
+        location: PlaceLocation.fromMap(map),
+        imagePath: map['image_path'],
+      );
+    } catch (e) {
+      return Place(
+        title: '',
+        location: PlaceLocation(lat: 0, long: 0),
+        imagePath: '',
+      );
+    }
   }
 
   Map<String, dynamic> toMap() {
@@ -29,7 +36,7 @@ class Place {
       'lat': location.lat,
       'long': location.long,
       'address': location.address,
-      'image_path': image.path,
+      'image_path': imagePath,
     };
   }
 }

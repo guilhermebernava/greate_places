@@ -11,7 +11,13 @@ class PlaceRepository {
 
   Future<int> create(Place place) async {
     try {
-      final id = await dbContext.database.transaction((txn) => txn.insert(
+      final db = await dbContext.getDb();
+
+      if (db == null) {
+        return -1;
+      }
+
+      final id = db.transaction((txn) => txn.insert(
             'Places',
             place.toMap(),
           ));
@@ -23,14 +29,25 @@ class PlaceRepository {
   }
 
   Future<int> update(Place place) async {
-    final result = await dbContext.database.update('Places', place.toMap());
+    final db = await dbContext.getDb();
+
+    if (db == null) {
+      return -1;
+    }
+    final result = await db.update('Places', place.toMap());
     return result;
   }
 
   Future<int> delete(int id) async {
     try {
-      final result = await dbContext.database
-          .rawDelete('DELETE FROM Places WHERE id = ?', ['$id']);
+      final db = await dbContext.getDb();
+
+      if (db == null) {
+        return -1;
+      }
+
+      final result =
+          await db.rawDelete('DELETE FROM Places WHERE id = ?', ['$id']);
       return result;
     } catch (e) {
       return 0;
@@ -39,8 +56,13 @@ class PlaceRepository {
 
   Future<List<Place>> getAll() async {
     final result = <Place>[];
+    final db = await dbContext.getDb();
 
-    final maps = await dbContext.database.rawQuery('SELECT * FROM Places');
+    if (db == null) {
+      return [];
+    }
+
+    final maps = await db.rawQuery('SELECT * FROM Places');
     for (var map in maps) {
       result.add(Place.fromMap(map));
     }

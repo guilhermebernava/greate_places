@@ -2,18 +2,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../themes/app_colors.dart';
+import '../error_image/error_image.dart';
 import '../pop_widget/pop_widget.dart';
 
 class SpecialAppBarImage extends StatelessWidget {
   final Size size;
-  final File image;
+  final String imagePath;
   final String routeReturn;
   final List<Widget> children;
 
   const SpecialAppBarImage({
     Key? key,
     required this.size,
-    required this.image,
+    required this.imagePath,
     required this.children,
     required this.routeReturn,
   }) : super(key: key);
@@ -46,10 +47,12 @@ class SpecialAppBarImage extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(25),
                         child: Image.file(
+                          errorBuilder: (context, error, stackTrace) =>
+                              const ErrorImage(),
                           height: size.height * 0.4,
                           width: size.width,
                           fit: BoxFit.cover,
-                          image,
+                          File(imagePath),
                         ),
                       ),
                       Container(

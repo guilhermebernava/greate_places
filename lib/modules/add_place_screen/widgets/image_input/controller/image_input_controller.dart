@@ -1,8 +1,10 @@
-import 'dart:io';
+// ignore_for_file: avoid_print
+
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ImageInputController {
-  File? storageImage;
+  String imagePath = '';
   bool isLoading = false;
   static const String _defaultText = 'No Image Selected';
   String text = _defaultText;
@@ -11,39 +13,38 @@ class ImageInputController {
   Future<void> pickAndSaveImage(
     void Function(void Function() fn) setState,
   ) async {
-    setState(() => isLoading = true);
+    setState(
+      () => isLoading = true,
+    );
+
     final image = await imagePicker
         .pickImage(source: ImageSource.gallery)
-        .timeout(const Duration(seconds: 5), onTimeout: () {
-      setState(() {
-        isLoading = false;
-        text = 'Error in loading this image';
-      });
+        .timeout(const Duration(seconds: 10), onTimeout: () {
       return null;
     }).onError((error, stackTrace) {
-      setState(() {
-        isLoading = false;
-        text = 'Error in loading this image';
-      });
       return null;
     });
 
     if (image != null) {
-      // final appDir = await getApplicationDocumentsDirectory();
-      // final fileName = basename(image.path);
-      // final savedImagePath = '${appDir.path}/$fileName}';
-      // await image.saveTo(savedImagePath);
+      try {
+        final appDir = await getApplicationDocumentsDirectory();
+        final String filePath = '${appDir.path}/${image.name}';
+        await image.saveTo(filePath).catchError((_) {
+          print('ERROR SAVING IMAGE');
+        });
 
-      setState(() {
-        storageImage = File(image.path);
-        isLoading = false;
-      });
-      return;
+        setState(() {
+          imagePath = filePath;
+          isLoading = false;
+        });
+
+        return;
+      } catch (e) {
+        setState(() {
+          imagePath = '';
+          isLoading = false;
+        });
+      }
     }
-
-    setState(() {
-      storageImage = null;
-      isLoading = false;
-    });
   }
 }

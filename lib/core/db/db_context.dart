@@ -4,18 +4,14 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DbContext {
-  late final Database _database;
-
-  Database get database => _database;
-
-  DbContext() {
+  Future<Database?> getDb() async {
     try {
-      getDatabasesPath().then((databasesPath) async {
-        _createDb(join(databasesPath, 'great-places.db'))
-            .then((db) => _database = db);
-      });
+      final databasesPath = await getDatabasesPath();
+      final db = await _createDb(join(databasesPath, 'great-places.db'));
+      return db;
     } catch (e) {
       debugPrint(e.toString());
+      return null;
     }
   }
 

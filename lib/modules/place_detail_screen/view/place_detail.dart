@@ -24,7 +24,7 @@ class PlaceDetail extends StatelessWidget {
         child: SpecialAppBarImage(
           routeReturn: routes.homeRoute,
           size: size,
-          image: place.image,
+          imagePath: place.imagePath,
           children: [
             Text(
               place.title,

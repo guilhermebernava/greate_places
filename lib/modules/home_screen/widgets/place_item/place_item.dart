@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:greate_places/core/models/place.dart';
 import 'package:greate_places/core/themes/app_colors.dart';
 import 'package:greate_places/core/themes/app_text_style.dart';
+import 'package:greate_places/core/widgets/error_image/error_image.dart';
 import 'package:greate_places/core/widgets/safe_button/safe_button.dart';
 import 'package:greate_places/modules/home_screen/stores/home_routes.dart';
 import '../../../../core/stores/places.dart';
@@ -67,15 +69,11 @@ class PlaceItem extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
-            onError: (exception, stackTrace) => const Icon(
-              Icons.image_not_supported_rounded,
-              size: 50,
-              color: Colors.white,
-            ),
+            onError: (error, stackTrace) => const ErrorImage(),
             fit: BoxFit.cover,
             opacity: 0.65,
             image: FileImage(
-              place.image,
+              File(place.imagePath),
             ),
           ),
         ),

@@ -72,19 +72,6 @@ class _AddPlaceState extends State<AddPlace> {
                     ],
                   ),
                 ),
-                Row(
-                  children: [
-                    SafeButton(
-                      onTap: () {},
-                      child: const Text(
-                        'My Location',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                )
               ],
             ),
           ),

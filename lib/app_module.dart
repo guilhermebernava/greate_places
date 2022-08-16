@@ -11,8 +11,12 @@ class AppModule extends Module {
   @override
   List<Bind<Object>> get binds => [
         Bind.singleton((i) => DbContext()),
-        Bind.singleton((i) => PlaceRepository(i.get<DbContext>())),
-        Bind.singleton((i) => Places(i.get<PlaceRepository>())),
+        Bind.singleton(
+          (i) => PlaceRepository(i.get<DbContext>()),
+        ),
+        Bind.singleton((i) => Places(
+              i.get<PlaceRepository>(),
+            )),
       ];
 
   @override
